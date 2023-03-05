@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#Author: Andrew McDonald
+#Name: wiffy1-1.sh
+#Description: Wifi Scanner
+#Date Created: March 1, 2023
+#Date Modified: March 4, 2023
+
+#clear the screen
+clear
+#declare variables
+input=0
+#text attributes
+blue="\033[0;34m"
+clear="\033[0m"
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+#while $input is not equal to q, loop
+while [ $input != q ]
+   do
+      #header/menu
+      printf "\n--------------------------------\n|          ${blue}.*******.${clear}           |\n|           ${blue}.*****.${clear}            |\n|            ${blue}.***.${clear}             |\n|              ${blue}*${clear}               |\n"
+      printf "|${bold}           _  _          _    ${normal}|\n|${bold} \    / | |_ |_ \/      | | | ${normal}|\n|${bold}  \/\/  | |  |   |   \/ |_|.| ${normal}|\n|                              |\n|  Author: A.McDonald, 2023    |\n|                              |\n--------------------------------\n"
+      printf "\n\n1. Scan for wi-fi networks\n2. View all exploits\n3. Methodology\n4. Help\n5. Exit\n\n"
+
+      #take input
+      read -p "Make a section from the list above: " input
+
+      case $input in
+         1)
+            clear
+            echo -e Available Networks: "\n\n"
+            #run a scan for wireless networks
+            nmcli dev wifi list
+            echo -e "\n\n"1. More information "\n"2. Back
+            read -p "make a selection " input
+
+            case $input in
+               1)
+                  clear
+                  echo -e Available Networks: "\n\n"
+                  nmcli -f ALL dev wifi
+                  echo -e Press Enter to go back
+                  ;;
+               2)
+                  input=q
+                  ;;
+            esac
+            ;;
+         2)
+            ;;
+         3)
+            ;;
+         4)
+            ;;
+         5)
+            clear
+            #set $input to q to break the loop
+            input=q
+            ;;
+         *)
+            clear
+            #catch wrong inputs
+            echo -e Incorrect selection. Please try again
+      esac
+
+   done
